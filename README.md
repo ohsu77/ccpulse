@@ -2,7 +2,7 @@
 
 > Real-time Claude Code usage in your terminal statusline
 
-![ccpulse demo](demo.gif)
+![ccpulse in action](screenshot.png)
 
 See your **session %**, **weekly %**, and **daily cost** — right where you work. No switching windows, no browser tabs.
 
