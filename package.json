@@ -15,13 +15,13 @@
   },
   "keywords": ["claude", "claude-code", "mcp", "usage", "statusline", "monitor", "anthropic"],
   "license": "MIT",
-  "homepage": "https://github.com/YOUR_USERNAME/ccpulse#readme",
+  "homepage": "https://github.com/ohsu77/ccpulse#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/ccpulse.git"
+    "url": "https://github.com/ohsu77/ccpulse.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/ccpulse/issues"
+    "url": "https://github.com/ohsu77/ccpulse/issues"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

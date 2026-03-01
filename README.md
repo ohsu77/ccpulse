@@ -53,7 +53,7 @@ Session and weekly % come directly from the Anthropic OAuth API — the same dat
 ### 1. Clone & build
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ccpulse.git ~/ccpulse
+git clone https://github.com/ohsu77/ccpulse.git ~/ccpulse
 cd ~/ccpulse
 npm install
 npm run build
@@ -68,7 +68,7 @@ Add to `~/.claude/mcp.json`:
   "mcpServers": {
     "ccpulse": {
       "command": "node",
-      "args": ["/Users/YOUR_USERNAME/ccpulse/dist/index.js"]
+      "args": ["/Users/ohsu77/ccpulse/dist/index.js"]
     }
   }
 }
