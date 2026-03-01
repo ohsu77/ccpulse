@@ -1,0 +1,12 @@
+src/
+*.tape
+demo-output.sh
+demo-full.sh
+demo.gif
+screenshot.png
+CLAUDE.md
+KNOWLEDGE.md
+PLANNING.md
+.claude/
+tsconfig.json
+*.map
