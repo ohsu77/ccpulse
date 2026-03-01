@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(head -3 ~/.claude/projects/-Users-ohsu-projects-claude-usage-mcp/1b7bfc7b-7f56-4c35-b2ea-46c0d0ec57f7.jsonl | python3 -m json.tool 2>/dev/null || head -1 ~/.claude/projects/-Users-ohsu-projects-claude-usage-mcp/1b7bfc7b-7f56-4c35-b2ea-46c0d0ec57f7.jsonl)",
+      "Bash(grep -l \"costUSD\\\\|input_tokens\\\\|output_tokens\" ~/.claude/projects/-Users-ohsu-*/*.jsonl 2>/dev/null | head -3)",
+      "Bash(grep \"costUSD\" ~/.claude/projects/-Users-ohsu-HIDENA-automation/0102eeaa-40f2-4a6d-9aac-50950384efa8.jsonl | head -2 | python3 -c \"import sys,json; [print\\(json.dumps\\(json.loads\\(l\\), indent=2\\)\\) for l in sys.stdin]\" 2>/dev/null | head -60)",
+      "Bash(grep -m1 \"input_tokens\\\\|costUSD\" ~/.claude/projects/-Users-ohsu-HIDENA-automation/2b078adf-c52f-4904-92b5-64224d1fcdd6.jsonl | python3 -c \"\nimport sys, json\nline = sys.stdin.read\\(\\).strip\\(\\)\ndata = json.loads\\(line\\)\n# show top-level keys and message keys\nprint\\('top keys:', list\\(data.keys\\(\\)\\)\\)\nif 'message' in data:\n    print\\('message keys:', list\\(data['message'].keys\\(\\)\\)\\)\n    if 'usage' in data['message']:\n        print\\('usage:', data['message']['usage']\\)\nprint\\('costUSD:', data.get\\('costUSD'\\)\\)\n\")",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebSearch",
+      "WebFetch(domain:support.anthropic.com)",
+      "WebFetch(domain:support.claude.com)",
+      "Bash(node -e \"\nconst { aggregate } = require\\('./dist/aggregator.js'\\);\nconst { loadConfig } = require\\('./dist/config.js'\\);\nconst { writeCache } = require\\('./dist/cache.js'\\);\nconst config = loadConfig\\(\\);\naggregate\\(config\\).then\\(s => { writeCache\\(s\\); console.log\\('Cache written'\\); }\\);\n\" && bash statusline.sh)",
+      "Bash(echo '{\"workspace\":{\"current_dir\":\"/Users/ohsu/projects/claude-usage-mcp\"},\"context_window\":{\"used_percentage\":42},\"model\":{\"display_name\":\"Claude Opus 4.6\"}}' | sh ~/.claude/statusline-command.sh)",
+      "Bash(echo '{\"workspace\":{\"current_dir\":\"/Users/ohsu/projects/claude-usage-mcp\"},\"context_window\":{\"used_percentage\":42},\"model\":{\"display_name\":\"Claude Opus 4.6\"}}' | bash ~/.claude/statusline-command.sh)",
+      "Bash(node -e \"\nconst { loadConfig, saveConfig } = require\\('./dist/config.js'\\);\nconst { readCache, writeCache } = require\\('./dist/cache.js'\\);\n\nconst config = loadConfig\\(\\);\nconst cache = readCache\\(\\);\n\nconst weeklyTokens = cache.weekly.tokens.inputTokens + cache.weekly.tokens.outputTokens;\nconst webPct = 30;\nconst factor = webPct / weeklyTokens;\n\nconsole.log\\('Weekly tokens:', weeklyTokens.toLocaleString\\(\\)\\);\nconsole.log\\('Web usage %:', webPct\\);\nconsole.log\\('Factor:', factor.toExponential\\(6\\)\\);\n\nconfig.calibration.dataPoints.push\\({\n  date: new Date\\(\\).toISOString\\(\\),\n  tokens: weeklyTokens,\n  webUsagePct: webPct,\n}\\);\nconfig.calibration.factor = factor;\nconfig.calibration.lastCalibrated = new Date\\(\\).toISOString\\(\\);\nsaveConfig\\(config\\);\n\n// Update cache with factor\ncache.calibrationFactor = factor;\nwriteCache\\(cache\\);\n\nconsole.log\\('Done — calibration saved'\\);\n\")",
+      "WebFetch(domain:kentgigger.com)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:codelynx.dev)",
+      "WebFetch(domain:gist.github.com)",
+      "Bash(node -e \"\nconst { getOAuthUsage, formatResetsIn } = require\\('./dist/oauth.js'\\);\ngetOAuthUsage\\(\\).then\\(r => {\n  if \\(!r\\) { console.log\\('API 실패 — 폴백 모드'\\); return; }\n  console.log\\('Source:', r.source\\);\n  console.log\\('Session:', r.sessionPct + '%', '| 리셋까지:', formatResetsIn\\(r.sessionResetsAt\\)\\);\n  console.log\\('Weekly: ', r.weeklyPct + '%',  '| 리셋까지:', formatResetsIn\\(r.weeklyResetsAt\\)\\);\n}\\);\n\" 2>/dev/null)",
+      "Bash(node -e \"\nconst { getOAuthUsage, formatResetsIn } = require\\('./dist/oauth.js'\\);\ngetOAuthUsage\\(\\).then\\(r => {\n  if \\(!r\\) { console.log\\('API 실패 — 폴백 모드'\\); return; }\n  console.log\\('Source:', r.source\\);\n  console.log\\('Session:', r.sessionPct + '%', '리셋까지:', formatResetsIn\\(r.sessionResetsAt\\)\\);\n  console.log\\('Weekly: ', r.weeklyPct + '%',  '리셋까지:', formatResetsIn\\(r.weeklyResetsAt\\)\\);\n}\\).catch\\(e => console.error\\('Error:', e.message\\)\\);\n\" 2>&1)",
+      "Bash(security find-generic-password -s \"Claude Code-credentials\" -w 2>&1 | head -c 200)",
+      "Bash(npm run build 2>&1 && node -e \"\nconst { getOAuthUsage, formatResetsIn } = require\\('./dist/oauth.js'\\);\ngetOAuthUsage\\(\\).then\\(r => {\n  if \\(!r\\) { console.log\\('API 실패 — 폴백 모드'\\); return; }\n  console.log\\('Source:', r.source\\);\n  console.log\\('Session:', r.sessionPct + '%', '| 리셋까지:', formatResetsIn\\(r.sessionResetsAt\\)\\);\n  console.log\\('Weekly: ', r.weeklyPct + '%',  '| 리셋까지:', formatResetsIn\\(r.weeklyResetsAt\\)\\);\n}\\).catch\\(e => console.error\\('Error:', e.message\\)\\);\n\" 2>&1)",
+      "Bash(echo '{\"workspace\":{\"current_dir\":\"/Users/ohsu/projects/claude-usage-mcp\"},\"context_window\":{\"used_percentage\":46},\"model\":{\"display_name\":\"Claude Sonnet 4.6\"}}' | bash ~/.claude/statusline-command.sh)",
+      "Bash(python3 -m json.tool)",
+      "Bash(node /Users/ohsu/projects/claude-usage-mcp/dist/refresh.js && echo \"OK: $\\(date\\)\" && cat ~/.claude-usage/cache.json | python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'Session: {d[\\\\\"oauth\\\\\"][\\\\\"sessionPct\\\\\"]}%  Weekly: {d[\\\\\"oauth\\\\\"][\\\\\"weeklyPct\\\\\"]}%'\\)\")",
+      "Bash(time node /Users/ohsu/projects/claude-usage-mcp/dist/refresh.js && cat ~/.claude-usage/cache.json | python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'Session: {d[\\\\\"oauth\\\\\"][\\\\\"sessionPct\\\\\"]}%  Weekly: {d[\\\\\"oauth\\\\\"][\\\\\"weeklyPct\\\\\"]}%'\\)\")"
+    ]
+  }
+}
