@@ -2,10 +2,7 @@
 
 > Real-time Claude Code usage in your terminal statusline
 
-```
-➜  my-project git:(main) ✗  [ctx:42%]  Claude Sonnet 4.6
-   [MAX]  S ████████░░ 78%  ↻38m  W ████░░░░░░ 35%  ~$42.45
-```
+![ccpulse demo](demo.gif)
 
 See your **session %**, **weekly %**, and **daily cost** — right where you work. No switching windows, no browser tabs.
 
