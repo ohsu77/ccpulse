@@ -1,10 +1,10 @@
 {
-  "name": "cctop",
+  "name": "ccpulse",
   "version": "0.1.0",
   "description": "Real-time Claude Code usage in your terminal statusline",
   "main": "dist/index.js",
   "bin": {
-    "cctop": "dist/index.js"
+    "ccpulse": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -15,13 +15,13 @@
   },
   "keywords": ["claude", "claude-code", "mcp", "usage", "statusline", "monitor", "anthropic"],
   "license": "MIT",
-  "homepage": "https://github.com/YOUR_USERNAME/cctop#readme",
+  "homepage": "https://github.com/YOUR_USERNAME/ccpulse#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/cctop.git"
+    "url": "https://github.com/YOUR_USERNAME/ccpulse.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/cctop/issues"
+    "url": "https://github.com/YOUR_USERNAME/ccpulse/issues"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

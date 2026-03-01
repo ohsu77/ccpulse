@@ -1,4 +1,4 @@
-# cctop
+# ccpulse
 
 > Real-time Claude Code usage in your terminal statusline
 
@@ -11,11 +11,11 @@ See your **session %**, **weekly %**, and **daily cost** — right where you wor
 
 ---
 
-## Why cctop?
+## Why ccpulse?
 
-[ccusage](https://github.com/ryoppippi/ccusage) is great for querying usage from the command line. cctop does something different: it **lives in your statusline**, updates automatically, and pulls the same accurate numbers you see on claude.ai.
+[ccusage](https://github.com/ryoppippi/ccusage) is great for querying usage from the command line. ccpulse does something different: it **lives in your statusline**, updates automatically, and pulls the same accurate numbers you see on claude.ai.
 
-| | ccusage | cctop |
+| | ccusage | ccpulse |
 |--|--|--|
 | Source | Local JSONL logs (estimated) | OAuth API (exact same as claude.ai) |
 | Interface | CLI command | Statusline (always visible) |
@@ -53,8 +53,8 @@ Session and weekly % come directly from the Anthropic OAuth API — the same dat
 ### 1. Clone & build
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/cctop.git ~/cctop
-cd ~/cctop
+git clone https://github.com/YOUR_USERNAME/ccpulse.git ~/ccpulse
+cd ~/ccpulse
 npm install
 npm run build
 ```
@@ -66,9 +66,9 @@ Add to `~/.claude/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "cctop": {
+    "ccpulse": {
       "command": "node",
-      "args": ["/Users/YOUR_USERNAME/cctop/dist/index.js"]
+      "args": ["/Users/YOUR_USERNAME/ccpulse/dist/index.js"]
     }
   }
 }
@@ -84,7 +84,7 @@ chmod +x ~/.claude/statusline-command.sh
 Edit the `REFRESH_SCRIPT` path in `~/.claude/statusline-command.sh` to match your install location:
 
 ```bash
-REFRESH_SCRIPT="$HOME/cctop/dist/refresh.js"
+REFRESH_SCRIPT="$HOME/ccpulse/dist/refresh.js"
 ```
 
 ### 4. Enable in Claude Code settings
@@ -156,7 +156,7 @@ The statusline script checks cache age on every prompt. If the cache is older th
 
 ## MCP Tools
 
-cctop registers these tools with Claude Code:
+ccpulse registers these tools with Claude Code:
 
 | Tool | Description |
 |------|-------------|
