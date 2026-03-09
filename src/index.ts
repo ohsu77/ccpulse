@@ -139,6 +139,10 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
     const weeklyTokens =
       summary.weekly.tokens.inputTokens + summary.weekly.tokens.outputTokens;
 
+    if (weeklyTokens === 0) {
+      return { content: [{ type: "text", text: "No weekly tokens recorded yet. Use Claude Code first." }] };
+    }
+
     config.calibration.dataPoints.push({
       date: new Date().toISOString(),
       tokens: weeklyTokens,

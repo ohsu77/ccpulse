@@ -6,7 +6,7 @@ import type { OAuthUsage } from "./types.js";
 
 const USAGE_ENDPOINT = "https://api.anthropic.com/api/oauth/usage";
 const BETA_HEADER = "oauth-2025-04-20";
-const CACHE_TTL_MS = 60_000; // 60 seconds
+const CACHE_TTL_MS = 300_000; // 5 minutes
 
 let cachedResult: { data: OAuthUsage; expiresAt: number } | null = null;
 
@@ -61,6 +61,10 @@ interface RawOAuthResponse {
   seven_day?: { utilization?: number; resets_at?: string };
 }
 
+export class RateLimitError extends Error {
+  constructor() { super("rate_limited"); }
+}
+
 async function fetchUsageApi(token: string): Promise<OAuthUsage> {
   const res = await fetch(USAGE_ENDPOINT, {
     headers: {
@@ -71,6 +75,7 @@ async function fetchUsageApi(token: string): Promise<OAuthUsage> {
     signal: AbortSignal.timeout(5000),
   });
 
+  if (res.status === 429) throw new RateLimitError();
   if (!res.ok) {
     throw new Error(`API ${res.status}: ${await res.text()}`);
   }
@@ -105,6 +110,7 @@ export async function getOAuthUsage(): Promise<OAuthUsage | null> {
     cachedResult = { data, expiresAt: Date.now() + CACHE_TTL_MS };
     return data;
   } catch (err) {
+    if (err instanceof RateLimitError) throw err; // propagate to caller for backoff handling
     process.stderr.write(`oauth: API failed (${err}), using local fallback\n`);
     return null;
   }

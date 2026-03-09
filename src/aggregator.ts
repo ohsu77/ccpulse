@@ -2,7 +2,7 @@ import { readdirSync, statSync } from "fs";
 import { homedir } from "os";
 import { join } from "path";
 import { parseFile } from "./parser.js";
-import { getOAuthUsage } from "./oauth.js";
+import { getOAuthUsage, RateLimitError } from "./oauth.js";
 import type { AggregatedUsage, UsageEntry, UsageSummary, Config } from "./types.js";
 
 function getWeekStart(weekStartDay: "monday" | "sunday"): Date {
@@ -77,7 +77,13 @@ export async function aggregate(config: Config): Promise<UsageSummary> {
   }
 
   // OAuth API for accurate session/weekly %
-  const oauth = await getOAuthUsage();
+  let oauth = null;
+  try {
+    oauth = await getOAuthUsage();
+  } catch (err) {
+    if (!(err instanceof RateLimitError)) throw err;
+    // rate limited — proceed with null oauth, caller handles stale display
+  }
 
   return {
     plan: config.plan,

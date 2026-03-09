@@ -59,7 +59,8 @@ export function calcCost(
   inputTokens: number,
   outputTokens: number,
   cacheReadTokens: number,
-  cacheCreationTokens: number
+  cacheCreation5mTokens: number,
+  cacheCreation1hTokens = 0
 ): number {
   const p = getPricing(model);
   const M = 1_000_000;
@@ -68,6 +69,7 @@ export function calcCost(
     (inputTokens * p.inputPerM) / M +
     (outputTokens * p.outputPerM) / M +
     (cacheReadTokens * p.cacheReadPerM) / M +
-    (cacheCreationTokens * p.cacheCreation5mPerM) / M
+    (cacheCreation5mTokens * p.cacheCreation5mPerM) / M +
+    (cacheCreation1hTokens * p.cacheCreation1hPerM) / M
   );
 }

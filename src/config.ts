@@ -23,8 +23,12 @@ export function loadConfig(): Config {
     return DEFAULT_CONFIG;
   }
   try {
-    const raw = readFileSync(CONFIG_PATH, "utf-8");
-    return { ...DEFAULT_CONFIG, ...JSON.parse(raw) };
+    const raw = JSON.parse(readFileSync(CONFIG_PATH, "utf-8"));
+    return {
+      ...DEFAULT_CONFIG,
+      ...raw,
+      calibration: { ...DEFAULT_CONFIG.calibration, ...raw.calibration },
+    };
   } catch {
     return DEFAULT_CONFIG;
   }

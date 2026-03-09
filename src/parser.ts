@@ -58,17 +58,19 @@ export function parseLine(line: string): UsageEntry | null {
   const inputTokens = u.input_tokens ?? 0;
   const outputTokens = u.output_tokens ?? 0;
   const cacheReadTokens = u.cache_read_input_tokens ?? 0;
-  const cacheCreationTokens =
+  const cacheCreation5mTokens =
     (u.cache_creation_input_tokens ?? 0) +
-    (u.cache_creation?.ephemeral_5m_input_tokens ?? 0) +
-    (u.cache_creation?.ephemeral_1h_input_tokens ?? 0);
+    (u.cache_creation?.ephemeral_5m_input_tokens ?? 0);
+  const cacheCreation1hTokens = u.cache_creation?.ephemeral_1h_input_tokens ?? 0;
+  const cacheCreationTokens = cacheCreation5mTokens + cacheCreation1hTokens;
 
   const costUSD = calcCost(
     model,
     inputTokens,
     outputTokens,
     cacheReadTokens,
-    cacheCreationTokens
+    cacheCreation5mTokens,
+    cacheCreation1hTokens
   );
 
   return {
